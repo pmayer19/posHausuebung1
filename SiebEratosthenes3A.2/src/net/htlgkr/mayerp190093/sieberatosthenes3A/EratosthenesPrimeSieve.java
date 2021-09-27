@@ -21,7 +21,7 @@ public class EratosthenesPrimeSieve implements EratosthenesInterface {
     }
 
     public static void main(String[] args) {
-        EratosthenesPrimeSieve e = new EratosthenesPrimeSieve(5);
+        EratosthenesPrimeSieve e = new EratosthenesPrimeSieve(3);
         e.findprimes();
         e.printPrimes();
     }
