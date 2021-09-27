@@ -21,7 +21,7 @@ public class EratosthenesPrimeSieve implements EratosthenesInterface {
     }
 
     public static void main(String[] args) {
-        EratosthenesPrimeSieve e = new EratosthenesPrimeSieve(15);
+        EratosthenesPrimeSieve e = new EratosthenesPrimeSieve(30);
         e.findprimes();
         e.printPrimes();
     }
@@ -43,9 +43,9 @@ public class EratosthenesPrimeSieve implements EratosthenesInterface {
             primes.add(i);
         }
 
-        for (int i = 2; i < primes.size(); i++) {
+        for (int i = 2; i <= primes.size(); i++) {
             if (isPrime(i) == true) {
-                for (int j = 2; j < primes.size(); j++) {
+                for (int j = 2; j <= primes.size(); j++) {
                     if (primes.contains(i * j)) {
                         int result = i * j;
                         primes.remove(result);
