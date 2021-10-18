@@ -13,52 +13,76 @@ import java.util.ArrayList;
  */
 public class EratosthenesPrimeSieve implements EratosthenesInterface {
 
-    int obergrenze;
-    public ArrayList<Integer> primes = new ArrayList<Integer>();
-
-    public EratosthenesPrimeSieve(int obergrenze) {
-        this.obergrenze = obergrenze;
-    }
+    int obergrenze = 10;
+    public boolean[] primes = new boolean[obergrenze];
 
     public static void main(String[] args) {
-        EratosthenesPrimeSieve e = new EratosthenesPrimeSieve(3);
-        e.findprimes();
+        EratosthenesPrimeSieve e = new EratosthenesPrimeSieve();
+        e.arrayPrepare();
+
+        for (int i = 2; i < e.primes.length; i++) {
+            e.isPrime(i);
+        }
+
         e.printPrimes();
+        e.zweiteAufgabe();
+    }
+
+    public void arrayPrepare() {
+        primes[0] = false;
+        primes[1] = false;
+        for (int i = 2; i < primes.length; i++) {
+            primes[i] = true;
+        }
     }
 
     @Override
     public boolean isPrime(int p) {
+        int e = 2;
         boolean b = false;
-        for (int i = 2; i < p; i++) {
-            if (i % p != 0) {
-                b = true;
+        for (int i = 2; i < primes.length; i++) {
+            if (primes[i] == true) {
+                while (e * p < primes.length) {
+                    if (primes[e * p] == true) {
+                        primes[e * p] = false;
+                        b = false;
+                    }
+                    e++;
+                }
             }
         }
         return b;
     }
 
-    public void findprimes() {
-
-        for (int i = 2; i <= obergrenze; i++) {
-            primes.add(i);
-        }
-
-        for (int i = 2; i <= primes.size(); i++) {
-            if (isPrime(i) == true) {
-                for (int j = 2; j <= primes.size(); j++) {
-                    if (primes.contains(i * j)) {
-                        int result = i * j;
-                        primes.remove(result);
-                    }
-                }
+    @Override
+    public void printPrimes() {
+        for (int i = 2; i < primes.length; i++) {
+            if (primes[i] == true) {
+                System.out.println(i);
             }
+
         }
     }
 
-    @Override
-    public void printPrimes() {
-        for (int i = 0; i < primes.size(); i++) {
-            System.out.println(primes.get(i));
+    public void zweiteAufgabe() {
+
+        int[] arr = new int[obergrenze];
+        for (int i = 0; i < primes.length; i++) {
+            if (primes[i] == true) {
+                arr[i] = i;
+            }
+        }
+        boolean b = true;
+        for (int i = 2; i <= arr.length; i = i + 2) {
+            b = true;
+            for (int j = 2; j < arr.length; j++) {
+                for (int k = 2; k < arr.length; k++) {
+                    if (i == k + j && b == true) {
+                        System.out.println(i + " = " + j + "+" + k);
+                        b = false;
+                    }
+                }
+            }
         }
     }
 
